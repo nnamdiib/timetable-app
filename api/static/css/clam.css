@@ -1,0 +1,112 @@
+@import url('bootstrap.css')
+
+html, body, .container-table{
+	height: 100%;
+}
+
+
+.container-table {
+	display: table;
+}
+
+.vertical-centre-row {
+	display: table-cell;
+	vertical-align: middle;
+}
+
+#add {
+	margin-left: 20%;
+
+}
+
+#submit {
+	margin-left: 30%;
+}
+
+/*trying to create a speicif print area with the class below */
+.noprint{
+	...
+}
+/* setting noprint display to NONE in print preview */
+
+@media print{
+	.noprint{
+		display:none;
+	}
+}
+
+div ul li:hover {
+	 background-color:#474e5d; /*dark blue*/
+	 color:#ffffff;	 
+ }
+
+tbody tr td:hover {
+ 	background-color: ##FFFFFF; /*light grey*/
+ 	
+ }
+ 
+td a{
+ 	color: #474e5d;
+ }
+td a:hover {
+ 	/*Changes the displayed levels hover color to light green*/
+	 color: #1abc9c !important; /*green*/ 
+	 text-decoration-style: none;
+
+
+ }
+	 
+div div div button:hover {
+	background-color: #474e5d !important
+}
+	
+#footer {
+	width: 100%;
+	background-color:#474e5d;
+	height: 30px;
+	font-family: Century Gothic;
+}
+
+#default-bg {
+	background-color: #F0EBEB;
+	font-family: Century Gothic;
+	font-size: 15px;
+	color: #474e5d; /*dark blue*/
+}
+
+.level {
+	text-align: center;
+	font-size: 45px;
+	color: #ffffff;
+}
+
+#Monday {
+	background-color: #1abc9c; /*green*/
+	text-align: center;
+	
+}
+
+#Tuesday {
+	background-color: #ffb5c5;  /*pale pink*/
+	text-align: center;
+
+}
+
+#Wednesday {
+	background-color: #8470ff; /*light slate blue*/
+	text-align: center;
+}
+
+#Thursday {
+	background-color: #ee7621; /*chocolate*/
+	text-align: center;
+}
+
+#Friday {
+	background-color: #7d9ec0; /*light yellow*/
+	text-align: center;
+}
+
+tr {
+	text-align: center;
+}

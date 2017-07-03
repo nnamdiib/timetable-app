@@ -1,0 +1,25 @@
+1. Start the Django shell
+	- Run the shell from within the app folder. api/
+	- So cd into api/ then call python ..\manage.py shell
+
+Inside the Django Shell, run the following:
+
+2. from api.models import Course, Day, Class
+
+3. from api.loader import load_data
+
+4. Declare a list with the file names.
+	- Convention is a list like this:
+		files = ['mon.xlsx', 'tue.xlsx', 'wed.xlsx', 'thu.xlsx', 'fri.xlsx']
+
+	Ensure all files are placed in api/parserfiles
+
+5. load_data(files)
+
+6. That's all. Unless there are unexpected breaks.
+
+It is important to note that all files in api/parserfiles smust be sanitized manually. Unexpected spaces in
+course names can lead to confusing duplicates, and can ultimately affect the integrity of the DB.
+
+    json_response = json.dumps(queryset)
+    return render(request, 'api/index.html', json_response)
