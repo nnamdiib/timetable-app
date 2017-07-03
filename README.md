@@ -1,10 +1,10 @@
-# Project Title
-
-One Paragraph of project description goes here
+# Timetable-app
+This is a web app that allows Covenant University students generate their timetables.
+It eliminates the need for printing, and any updates to the timetable from the school
+is reflected instantly.
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
 ### Prerequisites
 
@@ -53,8 +53,6 @@ python manage.py test
 * **Adeyemo Daniel** - [github](https://github.com/letroot)
 * **Ibeanusi Nnamdi** - [github](https://github.com/nnamdiib)
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
-
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License
