@@ -88,7 +88,7 @@ def days_endpoint(request, codes):
             for class_obj in class_objects:
                 if (class_obj.day == day):
                     course_dict = {
-                                    'course': class_obj.course.__str__(),
+                                    'course': class_obj.course.__str__().upper(),
                                     'time': class_obj.time,
                                     'venue': class_obj.venue,
                                     'day': class_obj.day.__str__()
