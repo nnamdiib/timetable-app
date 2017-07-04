@@ -12,15 +12,21 @@ $(document).ready(function()
 		// Get all the input from the text fields,		
 		var lastID = $("form input:last").attr("id");
 		var currentID = parseInt(lastID.slice(lastID.lastIndexOf('e') + 1 ));
-		var codes = "";
+		var params = "";
 
 		$("tbody").empty();
+		// Manually constructing the query Param string
 		for(var i = 1; i < currentID+1; i++) {
-			var course_code = $("#course"+i).val().toLowerCase().trim();
-			codes += course_code + ',';
+			if($("#course"+i).val() != ""){
+				if(i > 1) {
+					params += '&';
+				}
+				var course_code = $("#course"+i).val().toLowerCase().trim();
+				params += 'code='+ course_code;
+			}
 		}
 
-		var d = "http://"+ window.location.host + END_POINT + "codes/?codes=" + codes;
+		var d = "http://"+ window.location.host + END_POINT + "?" + params;
 
 		$.ajax({
 			url: d,
