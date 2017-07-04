@@ -14,7 +14,14 @@ Inside the Django Shell, run the following:
 
 	Ensure all files are placed in api/parserfiles
 
-5. load_data(files)
+5. Create all the Day objects. Monday - Friday in that order.
+	- Example:  m = Day(name="Monday")
+							m.save()
+
+							reapeat for the other days.
+
+5. Type this in the shell:
+			load_data(files)
 
 6. That's all. Unless there are unexpected breaks.
 
