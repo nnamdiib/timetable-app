@@ -1,5 +1,5 @@
-from clamparser import magic
-from models import Course, Day, Class
+from .clamparser import magic
+from .models import Course, Day, Class
 import sys, os
 
 PARSER_FILE_DIR = 'parserfiles'
