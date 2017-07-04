@@ -18,14 +18,13 @@ class ClassList(generics.ListAPIView):
         queryset = []
         
         params = self.request.query_params.get('codes', None)
+        print("The params i received", params)
         
         if params is not None:
             params = params.split(',')
-        print(params)
         
-        for token in params:
-            # queryset.extend(Class.objects.filter(day__name=str(token)))
-            queryset.extend(Class.objects.filter(course__name=str(token)))
+            for token in params:
+                queryset.extend(Class.objects.filter(course__name=str(token)))
 
         return queryset
 
@@ -74,7 +73,7 @@ def index(request):
     return render(request, 'api/index.html', {})
 
     
-def days_endpoint(request, codes):
+def day_end_point(request):
     queryset = {}
     days = list(Day.objects.all())
     params = request.GET.get("codes", None)

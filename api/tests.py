@@ -1,5 +1,5 @@
 from __future__ import unicode_literals
-from rest_framework.test import APIClient
+from rest_framework.test import APIClient, RequestsClient
 from rest_framework import status
 from django.test import TestCase
 from django.core.urlresolvers import reverse
@@ -21,9 +21,7 @@ class ModelTestCase(TestCase):
     self.course = Course(name=self.course_name)
 
     self.time = "08am-10am"
-    self.venue = "LT1"
-
-    
+    self.venue = "LT1"    
 
   def test_model_can_create_a_day(self):
     """Test if the Day model can create a Day object"""
