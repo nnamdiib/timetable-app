@@ -77,7 +77,6 @@ def day_end_point(request):
     queryset = {}
     days = list(Day.objects.all())
     params = request.GET.getlist("code", None)
-    print(params)
     if (params is not None):
         class_objects = [class_obj for class_obj in Class.objects.filter(course__name__in=params)]
 
