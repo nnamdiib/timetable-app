@@ -28,25 +28,24 @@ def load_data(filelist):
       print("I just created %s for %s" %(course_code, days[i].name))
 
 def load_specific_day(day, filelist):
-
     for i in range(len(filelist)):
-    base_dir = os.path.join(os.getcwd(), PARSER_FILE_DIR)
-    filepath = os.path.join(base_dir, filelist[i])
-    courses = magic(filepath, day)
-    existing_courses = [course.name for course in Course.objects.all()]
+      base_dir = os.path.join(os.getcwd(), PARSER_FILE_DIR)
+      filepath = os.path.join(base_dir, filelist[i])
+      courses = magic(filepath, day)
+      existing_courses = [course.name for course in Course.objects.all()]
 
-    for course_code in courses:
-      if course_code in existing_courses:
-        obj = Course.objects.filter(name=course_code)[0]
-      else:
-        obj = Course(name=course_code)
-        obj.save()
+      for course_code in courses:
+        if course_code in existing_courses:
+          obj = Course.objects.filter(name=course_code)[0]
+        else:
+          obj = Course(name=course_code)
+          obj.save()
 
-      the_time = courses[course_code]['time']
-      the_venue = courses[course_code]['venue']
-      the_class = Class(course=obj, day=day, time=the_time, venue=the_venue)
-      the_class.save()
-      print("I just created %s for %s" %(course_code, day.name))
+        the_time = courses[course_code]['time']
+        the_venue = courses[course_code]['venue']
+        the_class = Class(course=obj, day=day, time=the_time, venue=the_venue)
+        the_class.save()
+        print("I just created %s for %s" %(course_code, day.name))
 
 def clear_db():
   all_courses = Course.objects.all()
