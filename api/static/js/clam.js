@@ -133,3 +133,24 @@ function input_timetable_elements(classes)
 		}
 	}
 }
+
+/**
+ * Prints only a particular portion of your screen
+ * @param  {string} id [id of section o print]
+ * @param  {string} header_text [Header of document to print. <can be null>]
+ */
+function print_section(selector, header_text) {
+  $(selector).printThis({
+    header: header_text 
+  });
+}
+
+
+/**
+ * Print the timetable of user
+ */
+function print_table() {
+  header_text = "<h1 class=\"text-center\">Time Table</h1>";
+
+  print_section('.time-table', header_text);
+}
