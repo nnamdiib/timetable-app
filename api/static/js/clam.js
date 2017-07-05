@@ -106,7 +106,10 @@ function input_timetable_elements(classes)
 			for(j = 1; j < 6; j++) {
 				if(obj.day == TABLE_COLUMN_IDS[j]) {
 					var ch = $(row).children("td#"+obj.day)
-					$(ch).text(obj.time);
+					
+          obj.time = TrimData(obj.time);
+
+          $(ch).text(obj.time);
 				}
 			}
 
@@ -125,13 +128,52 @@ function input_timetable_elements(classes)
 			for(j = 1; j < 6; j++) {
 				var td = $("<td></td>").attr("id", TABLE_COLUMN_IDS[j]);
 				if(obj.day == TABLE_COLUMN_IDS[j]) {
-					$(td).text(obj.time);
+
+          obj.time = TrimData(obj.time);
+
+          $(td).text(obj.time);
 				}
+
 				$(row).append(td);
 			}
 
 		}
 	}
+}
+
+
+/**
+ * Trims time data ensure time is in 12 hours system
+ * @param  {string} time_data [time string]
+ * @return {string}           [time in 12 hours system]
+ */
+function trim_data(time_data) {
+  var final_time = "";
+  var time_object = time_data.split('-');
+
+  count = 0;
+  time_object.forEach(function(item) {
+
+      if(item[0].substring(0, 1) === "0") {
+        temp = item.substring(1);
+        item = temp;
+      }
+
+      if(~item.indexOf("pm")) {
+        //first section contains pm
+        final_time += ( ( parseInt(item.replace("pm","")) - 12 ) + "pm");
+      }
+      else {
+        final_time += item;
+      }
+
+      if(count == 0) {
+        final_time += " - ";
+        count++;
+      };
+  });
+
+  return final_time;
 }
 
 
