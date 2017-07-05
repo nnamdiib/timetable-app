@@ -12,7 +12,8 @@ def index(request):
 def class_end_point(request):
     queryset = []
     params = request.GET.getlist("code", None)
-    if (params is not None):
+
+    if (params):
         if(params[0] == 'all'):
             for class_obj in Class.objects.all():
                 course_dict = {
@@ -39,7 +40,7 @@ def day_end_point(request):
     queryset = {}
     days = list(Day.objects.all())
     params = request.GET.getlist("code", None)
-    if (params is not None):
+    if (params):
         class_objects = [class_obj for class_obj in Class.objects.filter(course__name__in=params)]
         for day in days:
             classes_for_day = []
