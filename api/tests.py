@@ -83,8 +83,7 @@ class ViewTestCase(TestCase):
 
   def test_api_class_end_point(self):
     response = self.client.get(
-                              '/classes/',
-                              kwargs={'code':'mat111'},
+                              '/class/?code=mat111',
                               format="json"
                               )
     print(response)
