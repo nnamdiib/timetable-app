@@ -53,20 +53,15 @@ $(document).ready(function()
 		var nextID = parseInt(currentID) + 1;
 
 		var fieldDiv = $("<div></div>").addClass("form-group");
-		
-		// the inner div
-		var innerDiv = $("<div></div>").addClass("col-sm-10");
-						
+			
 		// Input
 		var input = $("<input>").addClass("form-control");
 		$(input).attr("type", "text");
 		var newID = "course" + nextID;
 		$(input).attr("id", newID);
 
-		$("#submit").before(fieldDiv);
-		$(fieldDiv).append(innerDiv);
-		$(innerDiv).append(input);
-		$(".form-group:last").after(fieldDiv);
+		$("#submit").parent().parent().before(fieldDiv);
+		$(".form-group:last").append(input);
 
 	});
 });

@@ -14,15 +14,6 @@ html, body, .container-table{
 	vertical-align: middle;
 }
 
-#add {
-	margin-left: 20%;
-
-}
-
-#submit {
-	margin-left: 30%;
-}
-
 /*trying to create a speicif print area with the class below */
 .noprint{
 	...
