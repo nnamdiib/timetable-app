@@ -134,6 +134,39 @@ function input_timetable_elements(classes)
 	}
 }
 
+
+/**
+ * Enables string formatting using placeholders
+ * Source : https://www.codeproject.com/Tips/201899/String-Format-in-JavaScript
+ * @param  {array} args [values to replace]
+ * @return {string}      [replaced string]
+ */
+String.prototype.format = function (args) {
+      var str = this;
+
+      return str.replace(String.prototype.format.regex, function(item) {
+
+        var intVal = parseInt(item.substring(1, item.length - 1));
+        
+        var replace;
+        
+        if (intVal >= 0) {
+          replace = args[intVal];
+        } else if (intVal === -1) {
+          replace = "{";
+        } else if (intVal === -2) {
+          replace = "}";
+        } else {
+          replace = "";
+        }
+        return replace;
+      });
+    };
+
+String.prototype.format.regex = new RegExp("{-?[0-9]+}", "g");
+
+
+
 /**
  * Prints only a particular portion of your screen
  * @param  {string} selector [id of section to print]
@@ -150,7 +183,15 @@ function print_section(selector, header_text) {
  * Print the timetable of user
  */
 function print_table() {
-  header_text = "<h1 class=\"text-center\">Time Table</h1>";
+  header_text = "<h4 class=\"text-left\">{0}</h4>";
+  
+  date_time_stamp = "Current date: {0}<br><br>Time: {1}<br><br>".format(
+                      [
+                        new Date().toLocaleDateString(),
+                        new Date().toLocaleTimeString()
+                      ]);
 
+  header_text = header_text.format([date_time_stamp]);
+  
   print_section('.time-table', header_text);
 }
