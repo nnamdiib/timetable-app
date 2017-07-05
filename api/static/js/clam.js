@@ -71,9 +71,8 @@ $(document).ready(function()
 		var newID = "course" + nextID;
 		$(input).attr("id", newID);
 
-		$("#submit").parent().parent().before(fieldDiv);
-		$(".form-group:last").append(input);
-
+		$(".form-group:last").after(fieldDiv);
+		fieldDiv.append(input);
 	});
 });
 
