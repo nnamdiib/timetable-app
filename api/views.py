@@ -8,7 +8,6 @@ import json
 def index(request):
     return render(request, 'api/index.html', {})
 
-
 def class_end_point(request):
     queryset = []
     params = request.GET.getlist("code", None)
