@@ -15,24 +15,17 @@ def class_end_point(request):
 
     if (params):
         if(params[0] == 'all'):
-            for class_obj in Class.objects.all():
-                course_dict = {
-                                'course': class_obj.course.__str__().upper(),
-                                'time': class_obj.time,
-                                'venue': class_obj.venue,
-                                'day': class_obj.day.__str__()
-                              }
-                queryset.append(course_dict)
+            class_objects = list(Class.objects.all())
         else:     
             class_objects = [class_obj for class_obj in Class.objects.filter(course__name__in=params)]
-            for class_obj in class_objects:
-                course_dict = {
-                                'course': class_obj.course.__str__().upper(),
-                                'time': class_obj.time,
-                                'venue': class_obj.venue,
-                                'day': class_obj.day.__str__()
-                              }
-                queryset.append(course_dict)
+        for class_obj in class_objects:
+            course_dict = {
+                            'course': class_obj.course.__str__().upper(),
+                            'time': class_obj.time,
+                            'venue': class_obj.venue,
+                            'day': class_obj.day.__str__()
+                          }
+            queryset.append(course_dict)
     return JsonResponse(queryset, safe=False)
 
     
@@ -41,7 +34,10 @@ def day_end_point(request):
     days = list(Day.objects.all())
     params = request.GET.getlist("code", None)
     if (params):
-        class_objects = [class_obj for class_obj in Class.objects.filter(course__name__in=params)]
+        if(params[0] == 'all'):
+            class_objects = list(Class.objects.all())
+        else:
+            class_objects = [class_obj for class_obj in Class.objects.filter(course__name__in=params)]
         for day in days:
             classes_for_day = []
             for class_obj in class_objects:
