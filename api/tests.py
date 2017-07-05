@@ -48,3 +48,32 @@ class ModelTestCase(TestCase):
 
     new_count = Class.objects.count()
     self.assertNotEqual(old_count, new_count)
+
+
+class ViewTestCase(TestCase):
+  """ Test suite for the API views """
+
+  def setUp(self):
+    """ define the test client and other variables """
+    self.client = APIClient()
+
+    # Since user model instance is not serializable, use its ID/PK
+    self.course = Course(name="mat111")
+    self.course.save()
+
+  # def test_api_can_create_bucketlist(self):
+  #   """ test if the api can really create a bucket list """
+  #   self.assertEqual(self.response.status_code, status.HTTP_201_CREATED)
+
+  def test_api_can_get_a_course(self):
+    course = Course.objects.get(id=1)
+    response = self.client.get(
+                              '/dayend/',
+                              kwargs={'code': 'mat111'},
+                              format="json"
+                              )
+
+    self.assertEqual(response.status_code, status.HTTP_200_OK)
+    self.assertContains(response, course)
+
+
