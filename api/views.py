@@ -70,27 +70,84 @@ class DayList(generics.ListAPIView):
         return queryset
 
 def index(request):
-    return render(request, 'api/index.html', {})
-
+    # check if the user has added courses previously
+    if request.session.get('code_list'):
+        # return the index with a list of the courses the user had put previously
+        return render(request, 'api/index.html', {'code_list': request.session['code_list']})
+    else:
+        return render(request, 'api/index.html', {'code_list': None})
+    
+def clear_table(request):
+    # clear the session holding the list of course codes the user had entered previously
+    request.session['code_list'] = ''
+    return JsonResponse({'status' : 'success', 'code' : 'The Table Has Been Cleared' })
     
 def day_end_point(request):
     queryset = {}
     days = list(Day.objects.all())
     params = request.GET.getlist("code", None)
-    if (params is not None):
-        class_objects = [class_obj for class_obj in Class.objects.filter(course__name__in=params)]
 
-        for day in days:
-            classes_for_day = []
-            for class_obj in class_objects:
-                if (class_obj.day == day):
-                    course_dict = {
-                                    'course': class_obj.course.__str__().upper(),
-                                    'time': class_obj.time,
-                                    'venue': class_obj.venue,
-                                    'day': class_obj.day.__str__()
-                                  }
-                    classes_for_day.append(course_dict)
+    # check if the code_list session exists
+    if request.session.get('code_list'):
+        if (params is not None):
 
-            queryset[day.__str__()] = classes_for_day
+            # loop through the course codes the user inputs
+            for x in params:
+                request.session['code_list'] += '-' + x
+
+            # make the a unique list of the user's current course code list
+            unique_code_list = set(request.session.get('code_list').split('-'))
+
+            # get a list of class object that have the course codes entered
+            class_objects = [class_obj for class_obj in Class.objects.filter(course__name__in=unique_code_list)]
+
+            # if no class exist then the user input must be wrong and the session must be cleared
+            if len(class_objects) == 0:
+                request.session['code_list'] = ''
+
+            for day in days:
+                classes_for_day = []
+                for class_obj in class_objects:
+                    if (class_obj.day == day):
+                        course_dict = {
+                                        'course': class_obj.course.__str__().upper(),
+                                        'time': class_obj.time,
+                                        'venue': class_obj.venue,
+                                        'day': class_obj.day.__str__()
+                                      }
+                        classes_for_day.append(course_dict)
+
+                queryset[day.__str__()] = classes_for_day
+    else:
+        request.session['code_list'] = ''
+        if (params is not None):
+
+            # loop through the course codes the user inputs
+            for x in params:
+                request.session['code_list'] += '-' + x
+
+            # make the a unique list of the user's current course code list
+            unique_code_list = set(request.session.get('code_list').split('-'))
+
+            # get a list of class object that have the course codes entered
+            class_objects = [class_obj for class_obj in Class.objects.filter(course__name__in=unique_code_list)]
+
+            # if no class exist then the user input must be wrong and the session must be cleared
+            if len(class_objects) == 0:
+                request.session['code_list'] = ''
+
+            for day in days:
+                classes_for_day = []
+                for class_obj in class_objects:
+                    if (class_obj.day == day):
+                        course_dict = {
+                                        'course': class_obj.course.__str__().upper(),
+                                        'time': class_obj.time,
+                                        'venue': class_obj.venue,
+                                        'day': class_obj.day.__str__()
+                                      }
+                        classes_for_day.append(course_dict)
+
+                queryset[day.__str__()] = classes_for_day
+
     return JsonResponse(queryset)

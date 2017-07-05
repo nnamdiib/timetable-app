@@ -56,7 +56,7 @@
 						</div>
 						<div class="row">
 							<div class="col-md-6">
-								<button class="btn btn-primary btn-block" id="submit">Go!</button>								
+								<button type="button" class="btn btn-primary btn-block" onclick="dayendpoint()">Go!</button>								
 							</div>	
 							<div class="col-md-6">
 								<button class="btn bth-default btn-block" id="add">Add</button>	
@@ -69,10 +69,15 @@
 				<div class="text-centre col-md-7" >
 					<div id="print-glyph">
 					  <a href="javascript:window.print()"><span class="glyphicon glyphicon-print"></span>Print</a>
+					  {% if code_list is not None %}
+					  <button class="btn btn-danger btn-xs pull-right" onclick="clear_code_list()">Clear Table</button>
+					  <button class="btn btn-success btn-xs pull-right" onclick="dayendpoint()">Previous Table</button>
+					  {% endif %}
 					</div>
-					<table class='table table-striped table-bordered '>
+
+					<table class='table table-striped table-bordered' id="course-table">
 					    <thead class="thead-inverse">
-					        <tr>
+					        <tr class="course-table-header">
 					            <td>Course</td>
 					            <td>Mon</td>
 					            <td>Tue</td>
