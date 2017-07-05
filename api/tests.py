@@ -83,8 +83,10 @@ class ViewTestCase(TestCase):
 
   def test_api_class_end_point(self):
     response = self.client.get(
-                              '/classes/?code=mat111',
+                              '/classes/',
+                              kwargs={'code':'mat111'},
                               format="json"
                               )
+    print(response)
     self.assertEqual(response.status_code, status.HTTP_200_OK)
     self.assertContains(response, self.course.__str__().upper())
