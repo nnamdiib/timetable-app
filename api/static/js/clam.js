@@ -136,7 +136,7 @@ function input_timetable_elements(classes)
 
 /**
  * Prints only a particular portion of your screen
- * @param  {string} id [id of section o print]
+ * @param  {string} selector [id of section to print]
  * @param  {string} header_text [Header of document to print. <can be null>]
  */
 function print_section(selector, header_text) {
