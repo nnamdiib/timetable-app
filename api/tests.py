@@ -75,7 +75,7 @@ class ViewTestCase(TestCase):
 
   def test_api_day_end_point(self):
     response = self.client.get(
-                              '/dayend/?code=mat111',
+                              '/day/?code=mat111',
                               format="json"
                               )
     self.assertEqual(response.status_code, status.HTTP_200_OK)

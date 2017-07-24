@@ -1,7 +1,7 @@
 $(document).ready(function(){
 	$("#submit").click(function(e){
 		e.preventDefault();
-		var END_POINT = "/dayend/";
+		var END_POINT = "/day/";
 
 		// Array for each id of the table columns.
 		TABLE_COLUMN_IDS = ["course-name", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
