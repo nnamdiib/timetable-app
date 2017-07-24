@@ -10,7 +10,6 @@
 		<link href="{% static 'css/clam.css' %}" rel="stylesheet">
 		<script type="text/javascript" src="{% static 'js/jquery-3.2.1.js' %}"></script>
 		<script type="text/javascript" src="{% static 'js/clam.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/printThis.js' %}"></script>
 
 	</head>
 	<body class="container">
@@ -71,7 +70,7 @@
 
           <!-- Timetable -->
           <div class="pull-left" id="print-glyph">
-            <button class="form-control btn-success" id="print-btn" onclick="print_table();">
+            <button class="form-control btn-success" id="print-btn" onclick="javascript:window.print()">
               <span class="glyphicon glyphicon-print"></span>
               Print
             </button>

@@ -51,3 +51,8 @@ def day_end_point(request):
 
             queryset[day.__str__()] = classes_for_day
     return JsonResponse(queryset)
+
+def clear_table(request):
+    # clear the session holding the list of course codes the user had entered previously
+    request.session['code_list'] = ''
+    return JsonResponse({'status' : 'success', 'code' : 'The Table Has Been Cleared' })

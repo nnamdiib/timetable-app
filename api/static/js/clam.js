@@ -1,57 +1,42 @@
-function dayendpoint(){
+$(document).ready(function(){
+	$("#submit").click(function(e){
+		e.preventDefault();
+		var END_POINT = "/dayend/";
 
-	// The API endpoint
-	var END_POINT = "/dayend/";
+		// Array for each id of the table columns.
+		TABLE_COLUMN_IDS = ["course-name", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
 
-	// Array for each id of the table columns.
-	TABLE_COLUMN_IDS = ["course-name", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
+		// Get all the input from the text fields,		
+		var lastID = $("form input:last").attr("id");
+		var currentID = parseInt(lastID.slice(lastID.lastIndexOf('e') + 1 ));
+		var params = "";
 
-	// Get all the input from the text fields,		
-	var lastID = $("form input:last").attr("id");
-	var currentID = parseInt(lastID.slice(lastID.lastIndexOf('e') + 1 ));
-	var params = "";
-
-	$("tbody").empty();
-	// Manually constructing the query Param string
-	for(var i = 1; i < currentID+1; i++) {
-		if($("#course"+i).val() != ""){
-			if(i > 1) {
-				params += '&';
+		$("tbody").empty();
+		// Manually constructing the query Param string
+		for(var i = 1; i < currentID+1; i++) {
+			if($("#course"+i).val() != ""){
+				if(i > 1) {
+					params += '&';
+				}
+				var course_code = $("#course"+i).val().toLowerCase().trim();
+				params += 'code='+ course_code;
 			}
-			var course_code = $("#course"+i).val().toLowerCase().trim();
-			params += 'code='+ course_code;
 		}
-	}
 
-	var d = "http://"+ window.location.host + END_POINT + "?" + params;
+		var d = "http://"+ window.location.host + END_POINT + "?" + params;
 
-	$.ajax({
-		url: d,
-		type: 'GET',
-		dataType: "json",
-		success: function(json){
-			//parse_json_from_class_end(json);
-			parse_json_from_day_end(json);
-		}
+		$.ajax({
+			url: d,
+			type: 'GET',
+			dataType: "json",
+			success: function(json){
+				//parse_json_from_class_end(json);
+				parse_json_from_day_end(json);
+			}
+		});
+
 	});
-}
-
-function clear_code_list(){
-	var d = "http://"+ window.location.host + '/clear-table';
-	$.ajax({
-		url: d,
-		type: 'GET',
-		dataType: "json",
-		success: function(json){
-			// clear table
-			$('tbody').children().css('display', 'none');
-		},
-		error: function (error) {
-			// error occured
-        	alert('An Error Ocuured. ' + error);
-      },
-	});
-}
+});
 
 $(document).ready(function()
 {
@@ -77,6 +62,22 @@ $(document).ready(function()
 	});
 });
 
+function clear_code_list(){
+	var d = "http://"+ window.location.host + '/clear-table';
+	$.ajax({
+		url: d,
+		type: 'GET',
+		dataType: "json",
+		success: function(json){
+			// clear table
+			$('tbody').children().css('display', 'none');
+		},
+		error: function (error) {
+			// error occured
+        	alert('An Error Ocuured. ' + error);
+      },
+	});
+}
 
 function parse_json_from_class_end(json)
 {
