@@ -10,7 +10,8 @@
 		<link href="{% static 'css/clam.css' %}" rel="stylesheet">
 		<script type="text/javascript" src="{% static 'js/jquery-3.2.1.js' %}"></script>
 		<script type="text/javascript" src="{% static 'js/clam.js' %}"></script>
-	
+    <script type="text/javascript" src="{% static 'js/printThis.js' %}"></script>
+
 	</head>
 	<body class="container">
     <nav class="navbar navbar-default" role="navigation">
@@ -67,24 +68,36 @@
 				</div>
 				<div class="text-centre col-md-1 " ></div>
 				<div class="text-centre col-md-7" >
-					<div id="print-glyph">
-					  <a href="javascript:window.print()"><span class="glyphicon glyphicon-print"></span>Print</a>
-					</div>
-					<table class='table table-striped table-bordered '>
-					    <thead class="thead-inverse">
-					        <tr>
-					            <td>Course</td>
-					            <td>Mon</td>
-					            <td>Tue</td>
-					            <td>Wed</td>
-					            <td>Thur</td>
-					            <td>Fri</td>
-					        </tr>
-					    </thead>
-					    <tbody>
-					    </tbody>
 
-					</table>
+          <!-- Timetable -->
+          <div class="pull-left" id="print-glyph">
+            <button class="form-control btn-success" id="print-btn" onclick="print_table();">
+              <span class="glyphicon glyphicon-print"></span>
+              Print
+            </button>
+          </div>
+
+          <br><br>
+          
+          <div class="time-table">
+  					<table class='table table-striped table-bordered '>
+  					    <thead class="thead-inverse">
+  					        <tr>
+  					            <td>Course</td>
+  					            <td>Mon</td>
+  					            <td>Tue</td>
+  					            <td>Wed</td>
+  					            <td>Thur</td>
+  					            <td>Fri</td>
+  					        </tr>
+  					    </thead>
+  					    <tbody>
+  					    </tbody>
+
+  					</table>
+          <div>
+          <!-- End of timetable -->
+
 				</div>
 			</div>		
 		</div>
@@ -92,5 +105,3 @@
 	  
 	</body>
 </html>
-
-
