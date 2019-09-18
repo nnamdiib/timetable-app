@@ -23,7 +23,7 @@ $(document).ready(function(){
 			}
 		}
 
-		var d = "http://"+ window.location.host + END_POINT + "?" + params;
+		var d = "https://"+ window.location.host + END_POINT + "?" + params;
 
 		$.ajax({
 			url: d,
